@@ -5,6 +5,7 @@ import Home from "./pages/Home";
 import { ProtectedRoute } from "../routes/ProtectedRoute";
 import Register from "./pages/Register";
 import NavigationLinks from "./components/NavLinks";
+import MovieDetail from "./pages/MovieDetail";
 
 function App() {
   return (
@@ -18,6 +19,14 @@ function App() {
             element={
               <ProtectedRoute>
                 <Home />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/movies/:id"
+            element={
+              <ProtectedRoute>
+                <MovieDetail />
               </ProtectedRoute>
             }
           />

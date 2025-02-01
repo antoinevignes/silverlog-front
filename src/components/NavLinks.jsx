@@ -6,8 +6,12 @@ export default function NavigationLinks() {
   const location = useLocation();
 
   return (
-    <div className="flex gap-2 mb-10">
-      {isLoggedIn && <Link to="/">Home</Link>}
+    <div className="absolute right-10 top-10">
+      {isLoggedIn && (
+        <Link className="mr-5" to="/">
+          Home
+        </Link>
+      )}
       {location.pathname === "/" && !isLoggedIn && (
         <Link to="login">Login</Link>
       )}
