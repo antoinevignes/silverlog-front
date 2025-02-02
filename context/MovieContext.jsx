@@ -8,6 +8,7 @@ const MovieProvider = ({ children }) => {
   const [input, setInput] = useState("");
   const [movies, setMovies] = useState({});
   const [movie, setMovie] = useState({});
+  const [credits, setCredits] = useState({});
 
   // SEARCH MOVIES
   async function searchMovies(input) {
@@ -47,9 +48,36 @@ const MovieProvider = ({ children }) => {
     setMovie(data);
   }, []);
 
+  const getCreditsByID = useCallback(async (id) => {
+    const options = {
+      method: "GET",
+      headers: {
+        accept: "application/json",
+        Authorization: `Bearer ${import.meta.env.VITE_TMDB_KEY}`,
+      },
+    };
+
+    const response = await fetch(
+      `https://api.themoviedb.org/3/movie/${id}/credits?language=fr-FR`,
+      options
+    );
+
+    const data = await response.json();
+    setCredits(data);
+  }, []);
+
   return (
     <MovieContext.Provider
-      value={{ input, setInput, searchMovies, movies, movie, getMovieByID }}
+      value={{
+        input,
+        setInput,
+        searchMovies,
+        movies,
+        movie,
+        getMovieByID,
+        getCreditsByID,
+        credits,
+      }}
     >
       {children}
     </MovieContext.Provider>

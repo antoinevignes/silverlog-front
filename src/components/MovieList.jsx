@@ -21,7 +21,7 @@ export default function MovieList() {
           >
             <div className="w-[200px] text-center">
               <p className="mb-2 whitespace-nowrap overflow-hidden text-ellipsis">
-                {movie.original_title} ({movie.release_date.substring(0, 4)})
+                {movie.title} ({movie.release_date.substring(0, 4)})
               </p>
 
               <div className="h-[300px] w-[200px]">
