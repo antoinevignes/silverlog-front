@@ -1,19 +1,17 @@
+/* eslint-disable react/prop-types */
 import { Link } from "react-router-dom";
-import { useMovies } from "../../context/MovieContext";
 
-export default function MovieList() {
-  const { movies } = useMovies();
-
+export default function MovieList({ data }) {
   return (
     <div
       className={`p-10 ${
-        movies.results?.length > 1
+        data.results?.length > 1
           ? "grid grid-cols-4 gap-10"
           : "flex justify-center"
       }`}
     >
-      {movies.results &&
-        movies.results.map((movie) => (
+      {data.results &&
+        data.results.map((movie) => (
           <Link
             to={`/movies/${movie.id}`}
             key={movie.id}

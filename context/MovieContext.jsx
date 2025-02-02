@@ -12,21 +12,30 @@ const MovieProvider = ({ children }) => {
 
   // SEARCH MOVIES
   async function searchMovies(input) {
-    const options = {
-      method: "GET",
-      headers: {
-        accept: "application/json",
-        Authorization: `Bearer ${import.meta.env.VITE_TMDB_KEY}`,
-      },
-    };
+    try {
+      const options = {
+        method: "GET",
+        headers: {
+          accept: "application/json",
+          Authorization: `Bearer ${import.meta.env.VITE_TMDB_KEY}`,
+        },
+      };
 
-    const response = await fetch(
-      `https://api.themoviedb.org/3/search/movie?query=${input}&include_adult=false&language=fr-FR&page=1`,
-      options
-    );
-    const data = await response.json();
+      const response = await fetch(
+        `https://api.themoviedb.org/3/search/movie?query=${input}&include_adult=false&language=fr-FR&page=1`,
+        options
+      );
 
-    setMovies(data);
+      if (!response.ok) {
+        return null;
+      }
+
+      const data = await response.json();
+
+      setMovies(data);
+    } catch (error) {
+      console.error(error.message);
+    }
   }
 
   // GET ONE MOVIE
@@ -44,10 +53,15 @@ const MovieProvider = ({ children }) => {
       options
     );
 
+    if (!response.ok) {
+      return null;
+    }
+
     const data = await response.json();
     setMovie(data);
   }, []);
 
+  // GET MOVIE CREDITS
   const getCreditsByID = useCallback(async (id) => {
     const options = {
       method: "GET",
@@ -61,6 +75,10 @@ const MovieProvider = ({ children }) => {
       `https://api.themoviedb.org/3/movie/${id}/credits?language=fr-FR`,
       options
     );
+
+    if (!response.ok) {
+      return null;
+    }
 
     const data = await response.json();
     setCredits(data);

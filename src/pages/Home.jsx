@@ -13,7 +13,7 @@ export default function Home() {
       )}
 
       <SearchForm />
-      {movies && <MovieList />}
+      {movies && <MovieList data={movies} />}
     </>
   );
 }
