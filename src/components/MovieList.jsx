@@ -22,12 +22,16 @@ export default function MovieList({ data }) {
                 {movie.title} ({movie.release_date.substring(0, 4)})
               </p>
 
-              <div className="h-[300px] w-[200px]">
-                <img
-                  src={`https://image.tmdb.org/t/p/w200/${movie.poster_path}`}
-                  alt={movie.original_title}
-                  className="w-full h-full object-cover"
-                />
+              <div className="h-[300px] w-[200px] flex justify-center items-center">
+                {movie.poster_path ? (
+                  <img
+                    src={`https://image.tmdb.org/t/p/w200/${movie.poster_path}`}
+                    alt={movie.original_title}
+                    className="w-full h-full object-cover"
+                  />
+                ) : (
+                  <p>Pas d&apos;image disponible</p>
+                )}
               </div>
             </div>
           </Link>

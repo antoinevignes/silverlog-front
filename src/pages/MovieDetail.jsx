@@ -23,11 +23,13 @@ export default function MovieDetail() {
         Retour
       </Link>
 
-      <img
-        src={`https://image.tmdb.org/t/p/original/${movie.backdrop_path}`}
-        alt={movie.original_title}
-        className="absolute top-0 left-0 w-full h-screen object-cover"
-      />
+      {movie.backdrop_path && (
+        <img
+          src={`https://image.tmdb.org/t/p/original/${movie.backdrop_path}`}
+          alt={movie.original_title}
+          className="absolute top-0 left-0 w-full h-screen object-cover"
+        />
+      )}
 
       <div className="absolute top-0 left-0 w-full h-screen bg-gradient-to-b from-transparent via-black/70 to-black"></div>
 
@@ -46,11 +48,15 @@ export default function MovieDetail() {
 
         <div className="w-[30%]">
           <div className="max-h-[600px] max-w-[400px]">
-            <img
-              src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}
-              alt={movie.original_title}
-              className="w-full h-full object-cover"
-            />
+            {movie.poster_path ? (
+              <img
+                src={`https://image.tmdb.org/t/p/w200/${movie.poster_path}`}
+                alt={movie.original_title}
+                className="w-full h-full object-cover"
+              />
+            ) : (
+              <p>Pas d&apos;image disponible</p>
+            )}
           </div>
         </div>
       </div>
