@@ -3,7 +3,7 @@ import { useWatchList } from "../../context/user/watchListContext";
 import { useEffect } from "react";
 import { FaClock, FaEye, FaRegClock, FaRegEye } from "react-icons/fa6";
 import { useWatched } from "../../context/user/WatchedContext";
-import { Rating } from "@mui/material";
+import { Rating, Tooltip } from "@mui/material";
 import StarIcon from "@mui/icons-material/Star";
 
 export default function UserButtons() {
@@ -48,33 +48,23 @@ export default function UserButtons() {
 
   return (
     <div className="flex gap-4 items-center">
-      <button
-        onClick={() => (isInWatchList ? deleteEntry(id) : addToWatchList(id))}
-      >
-        {isInWatchList ? (
-          <div className="flex items-center gap-2">
-            <FaClock /> Watchlist
-          </div>
-        ) : (
-          <div className="flex items-center gap-2">
-            <FaRegClock /> À voir
-          </div>
-        )}
-      </button>
+      <Tooltip title="Ajouter à la watchlist" arrow>
+        <button
+          onClick={() => (isInWatchList ? deleteEntry(id) : addToWatchList(id))}
+          className="button-user"
+        >
+          {isInWatchList ? <FaClock /> : <FaRegClock />}
+        </button>
+      </Tooltip>
 
-      <button
-        onClick={() => (isInWatched ? deleteWatched(id) : addToWatched(id))}
-      >
-        {isInWatched ? (
-          <div className="flex items-center gap-2">
-            <FaEye /> Vu
-          </div>
-        ) : (
-          <div className="flex items-center gap-2">
-            <FaRegEye /> Pas Vu
-          </div>
-        )}
-      </button>
+      <Tooltip title="Ajouter aux films vus" arrow>
+        <button
+          onClick={() => (isInWatched ? deleteWatched(id) : addToWatched(id))}
+          className="button-user"
+        >
+          {isInWatched ? <FaEye /> : <FaRegEye />}
+        </button>
+      </Tooltip>
 
       <p className="font-bold text-lg">Note : </p>
       <Rating
