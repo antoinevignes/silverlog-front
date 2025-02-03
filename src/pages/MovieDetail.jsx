@@ -43,7 +43,7 @@ export default function MovieDetail() {
             Réalisateur :{" "}
             {credits.crew?.find((person) => person.job === "Director")?.name}
           </p>
-          <p className="border-l-1 pl-6 mx-auto">{movie.overview}</p>
+          <p className="border-l-1 pl-6 mx-auto lg:w-[70%]">{movie.overview}</p>
           <UserButtons />
         </div>
 

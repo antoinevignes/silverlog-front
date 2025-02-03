@@ -19,26 +19,18 @@ export default function MovieList({ data }) {
             key={movie.id}
             className="flex flex-col justify-center items-center"
           >
-            <div className="w-[200px] text-center">
-              <p className="mb-2 whitespace-nowrap overflow-hidden text-ellipsis">
-                {movie.title} (
-                {movie.release_date
-                  ? movie.release_date.substring(0, 4)
-                  : "TBA"}
-                )
-              </p>
-
-              <div className="h-[300px] w-[200px] flex justify-center items-center">
-                {movie.poster_path ? (
-                  <img
-                    src={`https://image.tmdb.org/t/p/w200/${movie.poster_path}`}
-                    alt={movie.original_title}
-                    className="w-full h-full object-cover rounded-md"
-                  />
-                ) : (
-                  <p>Pas d&apos;image disponible</p>
-                )}
-              </div>
+            <div className="w-[200px] h-[300px] text-center box-border hover:border rounded-md">
+              {movie.poster_path ? (
+                <img
+                  src={`https://image.tmdb.org/t/p/w200/${movie.poster_path}`}
+                  alt={movie.original_title}
+                  className="w-full h-full object-cover rounded-md"
+                />
+              ) : (
+                <p className="mb-2 whitespace-nowrap overflow-hidden text-ellipsis">
+                  {movie.title}
+                </p>
+              )}
             </div>
           </Link>
         ))}
