@@ -11,7 +11,7 @@ import MyMovies from "./pages/account/MyMovies";
 
 function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/silverlog-front">
       <NavigationLinks />
 
       <main>

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Redirecting...</title>
+    <script>
+      // Capture le chemin demandé et redirige vers index.html
+      const pathSegments = window.location.pathname.split("/");
+      const repoName = "<nom-du-repo>"; // Remplacez par "silverlog-front"
+      const base = pathSegments.includes(repoName) ? `/${repoName}/` : "/";
+      sessionStorage.redirect =
+        base + window.location.pathname.split("/").slice(2).join("/");
+      window.location.replace(base);
+    </script>
+  </head>
+</html>
