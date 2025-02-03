@@ -1,4 +1,4 @@
-const baseURl = "http://localhost:3200/api";
+const baseURl = "https://silverlog-api.onrender.com/api";
 
 export const apiFetch = async (endpoint, options = {}) => {
   const headers = {
