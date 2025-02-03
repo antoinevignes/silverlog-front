@@ -7,6 +7,7 @@ import Register from "./pages/auth/Register";
 import NavigationLinks from "./components/NavLinks";
 import MovieDetail from "./pages/MovieDetail";
 import WatchList from "./pages/account/WatchList";
+import MyMovies from "./pages/account/MyMovies";
 
 function App() {
   return (
@@ -36,6 +37,14 @@ function App() {
             element={
               <ProtectedRoute>
                 <WatchList />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/account/watched"
+            element={
+              <ProtectedRoute>
+                <MyMovies />
               </ProtectedRoute>
             }
           />

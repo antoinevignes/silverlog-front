@@ -39,8 +39,6 @@ const MovieProvider = ({ children }) => {
         return;
       }
 
-      console.log(data);
-
       setMovies(data);
     } catch (error) {
       console.error(error.message);

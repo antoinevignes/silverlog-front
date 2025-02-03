@@ -1,4 +1,4 @@
-import { useMovies } from "../../context/MovieContext";
+import { useMovies } from "../../context/movies/MovieContext";
 import MovieList from "../components/MovieList";
 import SearchForm from "../components/SearchForm";
 
@@ -13,6 +13,7 @@ export default function Home() {
       )}
 
       <SearchForm />
+
       {movies && <MovieList data={movies} />}
     </>
   );

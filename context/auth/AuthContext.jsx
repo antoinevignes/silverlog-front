@@ -1,7 +1,7 @@
 /* eslint-disable react-refresh/only-export-components */
 /* eslint-disable react/prop-types */
 import { createContext, useContext, useState, useEffect } from "react";
-import { apiFetch } from "../api/api";
+import { apiFetch } from "../../api/api";
 
 const AuthContext = createContext();
 
@@ -32,7 +32,6 @@ const AuthProvider = ({ children }) => {
     try {
       const data = await apiFetch("/auth/login", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
       });
 

@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { useAuth } from "../../context/AuthContext";
+import { useAuth } from "../../context/auth/AuthContext";
 
 export default function NavigationLinks() {
   const { isLoggedIn, logout } = useAuth();
@@ -13,6 +13,9 @@ export default function NavigationLinks() {
           </Link>
           <Link to="/account/watchlist" className="mr-5">
             Watchlist
+          </Link>
+          <Link to="/account/watched" className="mr-5">
+            Mes films
           </Link>
           <Link to="/login" onClick={() => logout()}>
             Se déconnecter

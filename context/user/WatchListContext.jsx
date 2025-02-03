@@ -1,24 +1,21 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react-refresh/only-export-components */
 import { createContext, useCallback, useContext, useState } from "react";
-import { apiFetch } from "../api/api";
+import { apiFetch } from "../../api/api";
 
 const watchListContext = createContext();
 
 const WatchListProvider = ({ children }) => {
   const [watchList, setWatchList] = useState({});
 
-  // ADD
+  // POST
   const addToWatchList = async (id) => {
     try {
       await apiFetch("/watchlist/add", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer  ${import.meta.env.VITE_TMDB_KEY}`,
-        },
         body: JSON.stringify({ tmdbId: id }),
       });
+
       await fetchWatchList();
     } catch (error) {
       console.error(error.message);
@@ -30,10 +27,6 @@ const WatchListProvider = ({ children }) => {
     try {
       const data = await apiFetch("/watchlist", {
         method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${import.meta.env.VITE_TMDB_KEY}`,
-        },
       });
 
       setWatchList(data);
@@ -47,11 +40,8 @@ const WatchListProvider = ({ children }) => {
     try {
       await apiFetch(`/watchlist/${id}`, {
         method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${import.meta.env.VITE_TMDB_KEY}`,
-        },
       });
+
       await fetchWatchList();
     } catch (error) {
       console.error(error.message);

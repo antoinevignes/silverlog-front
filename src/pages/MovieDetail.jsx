@@ -1,5 +1,5 @@
 import { Link, useParams } from "react-router-dom";
-import { useMovies } from "../../context/MovieContext";
+import { useMovies } from "../../context/movies/MovieContext";
 import { useEffect } from "react";
 import { FaArrowLeft } from "react-icons/fa";
 import UserButtons from "../components/UserButtons";

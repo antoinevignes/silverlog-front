@@ -1,4 +1,4 @@
-import { useMovies } from "../../context/MovieContext";
+import { useMovies } from "../../context/movies/MovieContext";
 
 export default function SearchForm() {
   const { input, setInput, searchMovies, isSearching } = useMovies();
