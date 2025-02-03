@@ -9,17 +9,17 @@ export default function NavigationLinks() {
       {isLoggedIn && (
         <>
           <Link className="mr-5" to="/">
-            Home
+            Accueil
           </Link>
           <Link to="/account/watchlist" className="mr-5">
             Watchlist
           </Link>
           <Link to="/login" onClick={() => logout()}>
-            Log Out
+            Se déconnecter
           </Link>
         </>
       )}
-      {!isLoggedIn && <Link to="login">Login</Link>}
+      {!isLoggedIn && <Link to="login">Se connecter</Link>}
     </div>
   );
 }

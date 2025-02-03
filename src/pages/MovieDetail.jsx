@@ -17,7 +17,7 @@ export default function MovieDetail() {
     <>
       <Link
         to="/"
-        className="absolute top-10 left-10 z-10 flex gap-2 items-center"
+        className="absolute top-10 left-10 z-10 sm:flex gap-2 items-center hidden"
       >
         <FaArrowLeft />
         Retour
@@ -34,19 +34,20 @@ export default function MovieDetail() {
       <div className="absolute top-0 left-0 w-full h-screen bg-gradient-to-b from-transparent via-black/70 to-black"></div>
 
       <div className="flex items-center gap-10 relative z-10 text-white">
-        <div className="flex flex-col items-center gap-5 w-[70%]">
+        <div className="flex flex-col items-center gap-5 w-[100%] sm:w-[70%]">
           <h1 className="font-bold">
-            {movie.title} ({movie.release_date?.split("-")[0]})
+            {movie.title} (
+            {movie.release_date ? movie.release_date?.split("-")[0] : "TBA"})
           </h1>
           <p>
             Réalisateur :{" "}
             {credits.crew?.find((person) => person.job === "Director")?.name}
           </p>
-          <p className="border-l-1 pl-6 w-[70%] mx-auto">{movie.overview}</p>
+          <p className="border-l-1 pl-6 mx-auto">{movie.overview}</p>
           <UserButtons />
         </div>
 
-        <div className="w-[30%]">
+        <div className="sm:w-[30%] hidden sm:inline">
           <div className="max-h-[600px] max-w-[400px]">
             {movie.poster_path ? (
               <img

@@ -11,7 +11,7 @@ export default function WatchList() {
 
   return (
     <>
-      <h1 className="font-bold">Ma Watchlist</h1>
+      <h1 className="font-bold sm:mt-0 mt-20">Ma Watchlist</h1>
       <hr className="w-[50%] mx-auto mt-10" />
       <MovieList data={watchList} />
     </>
