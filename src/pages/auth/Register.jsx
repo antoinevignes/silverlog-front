@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { apiFetch } from "../../api/api";
+import { apiFetch } from "../../../api/api";
 
 export default function Register() {
   const [isSubmitting, setIsSubmitting] = useState(false);

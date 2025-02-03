@@ -1,9 +1,9 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
-import Login from "./pages/Login";
+import Login from "./pages/auth/Login";
 import Home from "./pages/Home";
 import { ProtectedRoute } from "../routes/ProtectedRoute";
-import Register from "./pages/Register";
+import Register from "./pages/auth/Register";
 import NavigationLinks from "./components/NavLinks";
 import MovieDetail from "./pages/MovieDetail";
 import WatchList from "./pages/account/WatchList";
@@ -40,7 +40,7 @@ function App() {
             }
           />
           <Route path="/login" element={<Login />} />
-          <Route path="/createAccount" element={<Register />} />
+          <Route path="/createaccount" element={<Register />} />
         </Routes>
       </main>
     </BrowserRouter>
