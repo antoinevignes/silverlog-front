@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../../context/auth/AuthContext";
+import { FaRegEnvelope } from "react-icons/fa6";
+import { IoKeyOutline } from "react-icons/io5";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -28,34 +30,44 @@ export default function Login() {
       <h1 className="text-2xl font-bold mb-6 text-center">Connectez-vous</h1>
 
       <form onSubmit={handleSubmit} className="space-y-4">
-        <div>
+        {/* EMAIL */}
+        <label className="input input-lg validator w-full bg-neutral-900">
+          <FaRegEnvelope className="opacity-50" />
           <input
             type="email"
-            placeholder="Adresse mail"
+            placeholder="mail@site.com"
+            required
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="w-full p-2 border rounded"
-            required
           />
-        </div>
+        </label>
+        <div className="validator-hint hidden">Entrez un email valide</div>
 
-        <div>
+        {/* PASSWORD */}
+        <label className="input input-lg validator bg-neutral-900 w-full">
+          <IoKeyOutline className="opacity-50" />
           <input
             type="password"
+            required
             placeholder="Mot de passe"
+            minLength="8"
+            title="Must be more than 8 characters"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="w-full p-2 border rounded"
-            required
           />
-        </div>
+        </label>
+        <p className="validator-hint hidden">Doit faire plus de 8 caractères</p>
 
         <button
           type="submit"
           disabled={isSubmitting}
-          className="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600 disabled:bg-gray-400"
+          className="btn btn-lg btn-soft w-full bg-neutral-900 hover:bg-neutral-950"
         >
-          {isSubmitting ? "Connexion en cours..." : "Se connecter"}
+          {isSubmitting ? (
+            <span className="loading loading-spinner"></span>
+          ) : (
+            "Se connecter"
+          )}
         </button>
       </form>
 
