@@ -5,10 +5,12 @@ import { FaClock, FaEye, FaRegClock, FaRegEye } from "react-icons/fa6";
 import { useWatched } from "../../context/user/WatchedContext";
 import { Rating } from "@mui/material";
 import StarIcon from "@mui/icons-material/Star";
+import { useToast } from "../../context/Toaster";
 
 export default function UserButtons() {
   const { id } = useParams();
 
+  // CONTEXTS
   const { addToWatchList, watchList, fetchWatchList, deleteEntry } =
     useWatchList();
   const {
@@ -19,10 +21,13 @@ export default function UserButtons() {
     rating,
     setRating,
   } = useWatched();
+  const { addToast } = useToast();
 
+  // CHECK IF IN
   const isInWatchList = watchList.results?.find((item) => item.id == id);
   const isInWatched = watched.results?.find((item) => item.id == id);
 
+  // LOAD LISTS AT RENDER
   useEffect(() => {
     fetchWatchList();
   }, [fetchWatchList]);
@@ -43,6 +48,7 @@ export default function UserButtons() {
     await setRating(newRating);
     if (newRating > 0) {
       addToWatched(id, newRating);
+      addToast("Ajoutés aux films", "success");
     }
   };
 
@@ -50,7 +56,12 @@ export default function UserButtons() {
     <div className="flex gap-4 items-center">
       <div className="tooltip" data-tip="Ajouter à la watchlist">
         <button
-          onClick={() => (isInWatchList ? deleteEntry(id) : addToWatchList(id))}
+          onClick={() =>
+            isInWatchList
+              ? (deleteEntry(id), addToast("Retiré de la watchlist."))
+              : (addToWatchList(id),
+                addToast("Ajouté à la watchlist !", "success"))
+          }
           className="btn btn-soft btn-square btn-lg"
         >
           {isInWatchList ? <FaClock /> : <FaRegClock />}
@@ -59,7 +70,11 @@ export default function UserButtons() {
 
       <div className="tooltip" data-tip="Ajouter aux films vus">
         <button
-          onClick={() => (isInWatched ? deleteWatched(id) : addToWatched(id))}
+          onClick={() =>
+            isInWatched
+              ? (deleteWatched(id), addToast("Retiré des films"))
+              : (addToWatched(id), addToast("Ajoutés aux films", "success"))
+          }
           className="btn btn-soft btn-square btn-lg"
         >
           {isInWatched ? <FaEye /> : <FaRegEye />}

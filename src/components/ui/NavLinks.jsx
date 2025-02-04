@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-import { useAuth } from "../../context/auth/AuthContext";
-import DrawerDaisy from "./ui/Drawer";
+import { useAuth } from "../../../context/auth/AuthContext";
+import MenuDaisy from "./Menu";
 
 export default function NavigationLinks() {
   const { isLoggedIn } = useAuth();
@@ -13,10 +13,9 @@ export default function NavigationLinks() {
             Accueil
           </Link>
 
-          <DrawerDaisy />
+          <MenuDaisy />
         </div>
       )}
-      {!isLoggedIn && <Link to="login">Se connecter</Link>}
     </div>
   );
 }

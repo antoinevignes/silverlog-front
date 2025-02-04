@@ -4,6 +4,9 @@ import SearchForm from "../components/SearchForm";
 
 export default function Home() {
   const { movies } = useMovies();
+
+  console.log(movies);
+
   return (
     <>
       {!movies.results?.length && (

@@ -9,12 +9,12 @@ const MovieProvider = ({ children }) => {
   const [movies, setMovies] = useState({});
   const [movie, setMovie] = useState({});
   const [credits, setCredits] = useState({});
-  const [isSearching, setIsSearching] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   // SEARCH MOVIES
   async function searchMovies(input) {
     try {
-      setIsSearching(true);
+      setIsLoading(true);
       const options = {
         method: "GET",
         headers: {
@@ -29,19 +29,22 @@ const MovieProvider = ({ children }) => {
       );
 
       if (!response.ok) {
+        setIsLoading(false);
         return null;
       }
 
       const data = await response.json();
 
       if (data.results.length === 0) {
-        setIsSearching(false);
+        setIsLoading(false);
         return;
       }
 
       setMovies(data);
+      setIsLoading(false);
     } catch (error) {
       console.error(error.message);
+      setIsLoading(false);
     }
   }
 
@@ -102,7 +105,7 @@ const MovieProvider = ({ children }) => {
         getMovieByID,
         getCreditsByID,
         credits,
-        isSearching,
+        isLoading,
       }}
     >
       {children}

@@ -4,10 +4,11 @@ import Login from "./pages/auth/Login";
 import Home from "./pages/Home";
 import { ProtectedRoute } from "../routes/ProtectedRoute";
 import Register from "./pages/auth/Register";
-import NavigationLinks from "./components/NavLinks";
+import NavigationLinks from "./components/ui/NavLinks";
 import MovieDetail from "./pages/MovieDetail";
 import WatchList from "./pages/account/WatchList";
 import MyMovies from "./pages/account/MyMovies";
+import Profile from "./pages/account/Profile";
 
 function App() {
   return (
@@ -29,6 +30,14 @@ function App() {
             element={
               <ProtectedRoute>
                 <MovieDetail />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/account/profile"
+            element={
+              <ProtectedRoute>
+                <Profile />
               </ProtectedRoute>
             }
           />
