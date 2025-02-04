@@ -1,5 +1,4 @@
 /* eslint-disable react/prop-types */
-import { Tooltip } from "@mui/material";
 import { Link } from "react-router-dom";
 
 export default function MovieList({ data }) {
@@ -20,7 +19,7 @@ export default function MovieList({ data }) {
             key={movie.id}
             className="flex flex-col justify-center items-center"
           >
-            <Tooltip title={movie.title}>
+            <div className="tooltip" data-tip={movie.title}>
               <div className="w-[200px] h-[300px] text-center box-border hover:border rounded-md">
                 {movie.poster_path ? (
                   <img
@@ -34,7 +33,7 @@ export default function MovieList({ data }) {
                   </p>
                 )}
               </div>
-            </Tooltip>
+            </div>
           </Link>
         ))}
     </div>
