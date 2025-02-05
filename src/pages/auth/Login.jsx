@@ -26,49 +26,54 @@ export default function Login() {
   };
 
   return (
-    <div className="mx-auto p-4 max-w-md">
-      <h1 className="text-2xl font-bold mb-6 text-center">Connectez-vous</h1>
+    <div>
+      <form onSubmit={handleSubmit}>
+        <fieldset className="fieldset w-lg bg-transparent border border-neutral-950 p-4 rounded-box">
+          <legend className="fieldset-legend text-2xl font-bold px-2">
+            Connectez vous
+          </legend>
+          {/* EMAIL */}
+          <label className="input input-lg validator w-full bg-neutral-900">
+            <FaRegEnvelope className="opacity-50" />
+            <input
+              type="email"
+              placeholder="mail@site.com"
+              required
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </label>
+          <div className="validator-hint hidden">Entrez un email valide</div>
 
-      <form onSubmit={handleSubmit} className="space-y-4">
-        {/* EMAIL */}
-        <label className="input input-lg validator w-full bg-neutral-900">
-          <FaRegEnvelope className="opacity-50" />
-          <input
-            type="email"
-            placeholder="mail@site.com"
-            required
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </label>
-        <div className="validator-hint hidden">Entrez un email valide</div>
+          {/* PASSWORD */}
+          <label className="input input-lg validator bg-neutral-900 w-full">
+            <IoKeyOutline className="opacity-50" />
+            <input
+              type="password"
+              required
+              placeholder="Mot de passe"
+              minLength="8"
+              title="Must be more than 8 characters"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </label>
+          <p className="validator-hint hidden">
+            Doit faire plus de 8 caractères
+          </p>
 
-        {/* PASSWORD */}
-        <label className="input input-lg validator bg-neutral-900 w-full">
-          <IoKeyOutline className="opacity-50" />
-          <input
-            type="password"
-            required
-            placeholder="Mot de passe"
-            minLength="8"
-            title="Must be more than 8 characters"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </label>
-        <p className="validator-hint hidden">Doit faire plus de 8 caractères</p>
-
-        <button
-          type="submit"
-          disabled={isSubmitting}
-          className="btn btn-lg btn-soft w-full bg-neutral-900 hover:bg-neutral-950"
-        >
-          {isSubmitting ? (
-            <span className="loading loading-spinner"></span>
-          ) : (
-            "Se connecter"
-          )}
-        </button>
+          <button
+            type="submit"
+            disabled={isSubmitting}
+            className="btn btn-lg btn-soft w-full bg-neutral-900 hover:bg-neutral-950"
+          >
+            {isSubmitting ? (
+              <span className="loading loading-spinner"></span>
+            ) : (
+              "Se connecter"
+            )}
+          </button>
+        </fieldset>
       </form>
 
       <div className="mt-4 text-center">

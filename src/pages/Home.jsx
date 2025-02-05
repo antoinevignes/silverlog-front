@@ -9,7 +9,7 @@ export default function Home() {
     <div className="hero">
       <div className="hero-content text-center flex flex-col">
         <div className="max-w-md">
-          {!movies.results?.length && (
+          {!movies.results && (
             <div>
               <h1 className="text-5xl font-bold">Silverlog</h1>
               <p className="py-6 text-2xl">
@@ -22,7 +22,7 @@ export default function Home() {
           <SearchForm />
         </div>
 
-        {movies && <MovieList data={movies} />}
+        {movies.results && <MovieList data={movies} />}
       </div>
     </div>
   );

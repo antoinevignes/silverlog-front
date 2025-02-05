@@ -13,6 +13,12 @@ const MovieProvider = ({ children }) => {
 
   // SEARCH MOVIES
   async function searchMovies(input) {
+    if (!input.trim() || input.trim().length < 2) {
+      setMovies({});
+      setIsLoading(false);
+      return;
+    }
+
     try {
       setIsLoading(true);
       const options = {
@@ -27,23 +33,11 @@ const MovieProvider = ({ children }) => {
         `https://api.themoviedb.org/3/search/movie?query=${input}&include_adult=false&language=fr-FR&page=1`,
         options
       );
-
-      if (!response.ok) {
-        setIsLoading(false);
-        return null;
-      }
-
       const data = await response.json();
-
-      if (data.results.length === 0) {
-        setIsLoading(false);
-        return;
-      }
-
-      setMovies(data);
-      setIsLoading(false);
+      setMovies(data.results?.length ? data : {});
     } catch (error) {
       console.error(error.message);
+    } finally {
       setIsLoading(false);
     }
   }
