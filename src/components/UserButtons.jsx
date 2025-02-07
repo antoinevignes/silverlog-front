@@ -44,11 +44,31 @@ export default function UserButtons() {
     }
   }, [isInWatched, setRating]);
 
+  const handleWatchedClick = async () => {
+    if (isInWatched) {
+      await deleteWatched(id);
+      addToast("Retiré des films");
+    } else {
+      await addToWatched(id);
+      addToast("Ajoutés aux films", "success");
+
+      if (isInWatchList) {
+        await deleteEntry(id);
+        addToast("Retiré de la watchlist", "info");
+      }
+    }
+  };
+
   const handleRatingChange = async (e, newRating) => {
     await setRating(newRating);
     if (newRating > 0) {
-      addToWatched(id, newRating);
+      await addToWatched(id, newRating);
       addToast("Ajoutés aux films", "success");
+
+      if (isInWatchList) {
+        await deleteEntry(id);
+        addToast("Retiré de la watchlist", "info");
+      }
     }
   };
 
@@ -70,18 +90,13 @@ export default function UserButtons() {
 
       <div className="tooltip" data-tip="Ajouter aux films vus">
         <button
-          onClick={() =>
-            isInWatched
-              ? (deleteWatched(id), addToast("Retiré des films"))
-              : (addToWatched(id), addToast("Ajoutés aux films", "success"))
-          }
+          onClick={handleWatchedClick}
           className="btn btn-soft btn-square btn-lg"
         >
           {isInWatched ? <FaEye /> : <FaRegEye />}
         </button>
       </div>
 
-      <p className="font-bold text-lg">Note : </p>
       <Rating
         name="half-rating"
         precision={0.5}

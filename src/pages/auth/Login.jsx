@@ -1,33 +1,15 @@
-import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useAuth } from "../../../context/auth/AuthContext";
 import { FaRegEnvelope } from "react-icons/fa6";
 import { IoKeyOutline } from "react-icons/io5";
 
 export default function Login() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const { login } = useAuth();
-  const navigate = useNavigate();
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-
-    try {
-      await login(email, password);
-      navigate("/");
-    } catch (error) {
-      alert(error.message || "Échec de la connexion");
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
+  const { login, isLoading, error, email, setEmail, password, setPassword } =
+    useAuth();
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={login}>
         <fieldset className="fieldset w-lg bg-transparent border border-neutral-950 p-4 rounded-box">
           <legend className="fieldset-legend text-2xl font-bold px-2">
             Connectez vous
@@ -64,10 +46,10 @@ export default function Login() {
 
           <button
             type="submit"
-            disabled={isSubmitting}
+            disabled={isLoading}
             className="btn btn-lg btn-soft w-full bg-neutral-900 hover:bg-neutral-950"
           >
-            {isSubmitting ? (
+            {isLoading ? (
               <span className="loading loading-spinner"></span>
             ) : (
               "Se connecter"
@@ -76,10 +58,10 @@ export default function Login() {
         </fieldset>
       </form>
 
+      {error && <p className="alert alert-error my-4">{error}</p>}
+
       <div className="mt-4 text-center">
-        <Link to="/createAccount" className="text-blue-500 hover:underline">
-          Pas de compte ? Créer un compte
-        </Link>
+        <Link to="/register">Pas de compte ? Créer un compte</Link>
       </div>
     </div>
   );

@@ -7,6 +7,7 @@ import MovieProvider from "../context/movies/MovieContext.jsx";
 import WatchedProvider from "../context/user/WatchedContext.jsx";
 import WatchListProvider from "../context/user/watchListContext.jsx";
 import ToastProvider from "../context/Toaster.jsx";
+import ProfileProvider from "../context/user/ProfileContext.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -15,7 +16,9 @@ createRoot(document.getElementById("root")).render(
         <WatchListProvider>
           <WatchedProvider>
             <ToastProvider>
-              <App />
+              <ProfileProvider>
+                <App />
+              </ProfileProvider>
             </ToastProvider>
           </WatchedProvider>
         </WatchListProvider>

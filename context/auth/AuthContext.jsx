@@ -6,8 +6,16 @@ import { apiFetch } from "../../api/api";
 const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [formData, setFormData] = useState({
+    username: "",
+    email: "",
+    password: "",
+  });
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const checkAuth = async () => {
@@ -28,7 +36,12 @@ const AuthProvider = ({ children }) => {
     checkAuth();
   }, []);
 
-  const login = async (email, password) => {
+  // LOGIN
+
+  const login = async (e) => {
+    e.preventDefault();
+    setIsLoading(true);
+
     try {
       const data = await apiFetch("/auth/login", {
         method: "POST",
@@ -38,18 +51,45 @@ const AuthProvider = ({ children }) => {
       localStorage.setItem("token", data.token);
       localStorage.setItem("user", JSON.stringify(data.user));
       setUser(data.user);
-
-      return true;
+      window.location = "/";
     } catch (error) {
-      console.error("Login error:", error);
-      throw error;
+      setError(error.message);
+    } finally {
+      setIsLoading(false);
     }
   };
+
+  // LOGOUT
 
   const logout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
     setUser(null);
+  };
+
+  // REGISTER
+
+  const register = async (e) => {
+    e.preventDefault();
+    setIsLoading(true);
+
+    try {
+      const data = await apiFetch("/auth/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      localStorage.setItem("token", data.token);
+      localStorage.setItem("user", JSON.stringify(data.user));
+      window.location = "/";
+    } catch (error) {
+      setError(error.message);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -60,6 +100,14 @@ const AuthProvider = ({ children }) => {
         isLoggedIn: !!user,
         login,
         logout,
+        register,
+        formData,
+        setFormData,
+        error,
+        email,
+        password,
+        setEmail,
+        setPassword,
       }}
     >
       {children}

@@ -1,47 +1,19 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
-import { apiFetch } from "../../../api/api";
 import { IoKeyOutline } from "react-icons/io5";
 import { FaRegEnvelope, FaRegUser } from "react-icons/fa6";
+import { useAuth } from "../../../context/auth/AuthContext";
 
 export default function Register() {
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [formData, setFormData] = useState({
-    username: "",
-    email: "",
-    password: "",
-  });
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-
-    try {
-      const data = await apiFetch("/auth/register", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
-
-      localStorage.setItem("token", data.token);
-      localStorage.setItem("user", JSON.stringify(data.user));
-      window.location = "/";
-    } catch (error) {
-      alert(error.message || "Echec de la création du compte.");
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
-
+  const { register, formData, setFormData, isLoading, error } = useAuth();
   return (
     <div>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={register}>
         <fieldset className="fieldset w-lg bg-transparent border border-neutral-950 p-4 rounded-box">
           <legend className="fieldset-legend text-2xl font-bold px-2">
             Rejoignez nous !
           </legend>
+
+          {/* USERNAME */}
           <label className="input input-lg validator w-full bg-neutral-900">
             <FaRegUser className="opacity-50" />
             <input
@@ -100,10 +72,10 @@ export default function Register() {
 
           <button
             type="submit"
-            disabled={isSubmitting}
+            disabled={isLoading}
             className="btn btn-lg btn-soft w-full bg-neutral-900 hover:bg-neutral-950"
           >
-            {isSubmitting ? (
+            {isLoading ? (
               <span className="loading loading-spinner"></span>
             ) : (
               "Créer un compte"
@@ -111,6 +83,8 @@ export default function Register() {
           </button>
         </fieldset>
       </form>
+
+      {error && <p className="alert alert-error my-4">{error}</p>}
 
       <div className="mt-4 text-center">
         <Link to="/login">Déjà un compte ? Connectez vous.</Link>
