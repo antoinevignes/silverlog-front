@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { useWatchList } from "../../context/user/watchListContext";
+import { useWatchList } from "../../context/user/WatchListContext";
 import { useEffect } from "react";
 import { FaClock, FaEye, FaRegClock, FaRegEye } from "react-icons/fa6";
 import { useWatched } from "../../context/user/WatchedContext";

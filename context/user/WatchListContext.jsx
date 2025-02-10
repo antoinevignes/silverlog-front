@@ -3,7 +3,7 @@
 import { createContext, useCallback, useContext, useState } from "react";
 import { apiFetch } from "../../api/api";
 
-const watchListContext = createContext();
+const WatchListContext = createContext();
 
 const WatchListProvider = ({ children }) => {
   const [watchList, setWatchList] = useState({});
@@ -49,7 +49,7 @@ const WatchListProvider = ({ children }) => {
   };
 
   return (
-    <watchListContext.Provider
+    <WatchListContext.Provider
       value={{
         watchList,
         setWatchList,
@@ -59,12 +59,12 @@ const WatchListProvider = ({ children }) => {
       }}
     >
       {children}
-    </watchListContext.Provider>
+    </WatchListContext.Provider>
   );
 };
 
 export const useWatchList = () => {
-  const context = useContext(watchListContext);
+  const context = useContext(WatchListContext);
   if (!context) {
     throw new Error("useWatchList must be used within an WatchListProvider");
   }

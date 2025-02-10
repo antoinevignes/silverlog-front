@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useWatchList } from "../../../context/user/watchListContext";
+import { useWatchList } from "../../../context/user/WatchListContext";
 import MovieList from "../../components/MovieList";
 
 export default function WatchList() {

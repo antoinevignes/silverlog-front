@@ -16,7 +16,7 @@ const renderRoute = (route) => {
 
 function App() {
   return (
-    <BrowserRouter basename="/silverlog-front">
+    <BrowserRouter>
       <NavigationLinks />
       <main>
         <Routes>{routes.map(renderRoute)}</Routes>
