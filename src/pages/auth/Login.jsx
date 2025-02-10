@@ -12,7 +12,7 @@ export default function Login() {
       <form onSubmit={login}>
         <fieldset className="fieldset w-lg bg-transparent border border-neutral-950 p-4 rounded-box">
           <legend className="fieldset-legend text-2xl font-bold px-2">
-            Connectez voussssss
+            Connectez vous
           </legend>
           {/* EMAIL */}
           <label className="input input-lg validator w-full bg-neutral-900">
