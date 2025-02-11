@@ -25,7 +25,7 @@ export default function ProfilePage() {
     <div className="flex flex-col gap-4">
       <Link
         to="/"
-        className="absolute top-10 left-10 z-10 sm:flex gap-2 items-center hidden text-[#cdd6f4]"
+        className="absolute top-10 left-10 z-10 sm:flex gap-2 items-center hidden"
       >
         <FaArrowLeft />
         Retour
@@ -37,7 +37,7 @@ export default function ProfilePage() {
 
       <div className="flex items-center gap-4">
         <div className="avatar avatar-placeholder">
-          <div className="bg-[#181825] text-neutral-content w-20 rounded-full">
+          <div className="bg-base-300 text-neutral-content w-20 rounded-full">
             <span className="text-3xl">
               {username.substring(0, 1).toUpperCase()}
             </span>
@@ -51,14 +51,14 @@ export default function ProfilePage() {
       <div className="flex gap-2">
         <input
           type="text"
-          className="input bg-transparent"
+          className="input"
           placeholder="Prénom"
           value={firstName}
           onChange={(e) => setFirstName(e.target.value)}
         />
         <input
           type="text"
-          className="input bg-transparent"
+          className="input"
           placeholder="Nom"
           value={lastName}
           onChange={(e) => setLastName(e.target.value)}
@@ -67,21 +67,21 @@ export default function ProfilePage() {
 
       <input
         type="email"
-        className="input bg-transparent w-full"
+        className="input w-full"
         placeholder="Email"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
       />
       <input
         type="text"
-        className="input bg-transparent w-full"
+        className="input w-full"
         placeholder="Pseudo"
         value={username}
         onChange={(e) => setUsername(e.target.value)}
       />
 
       <textarea
-        className="textarea w-full bg-transparent"
+        className="textarea w-full"
         placeholder="Votre bio"
         value={bio}
         onChange={(e) => setBio(e.target.value)}
@@ -90,7 +90,7 @@ export default function ProfilePage() {
       {error && <p className="alert alert-error">{error}</p>}
 
       <button
-        className="btn btn-soft bg-[#181825] hover:bg-[#11111b]"
+        className="btn btn-soft"
         onClick={() => {
           saveNewProfile();
           if (!error) {

@@ -33,7 +33,7 @@ export default function MovieDetail() {
 
       <div className="absolute top-0 left-0 w-full h-screen bg-gradient-to-b from-transparent via-black/70 to-black"></div>
 
-      <div className="flex items-center gap-10 relative z-10 text-white">
+      <div className="flex items-center gap-10 relative z-10">
         <div className="flex flex-col items-center gap-5 w-[100%] sm:w-[70%]">
           <h1 className="font-bold">
             {movie.title} (

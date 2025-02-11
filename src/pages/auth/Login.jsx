@@ -10,12 +10,12 @@ export default function Login() {
   return (
     <div>
       <form onSubmit={login}>
-        <fieldset className="fieldset w-lg bg-transparent border border-neutral-950 p-4 rounded-box">
+        <fieldset className="fieldset w-lg border p-4 rounded-box">
           <legend className="fieldset-legend text-2xl font-bold px-2">
             Connectez vous
           </legend>
           {/* EMAIL */}
-          <label className="input input-lg validator bg-[#181825] w-full -900">
+          <label className="input input-lg validator w-full -900">
             <FaRegEnvelope className="opacity-50" />
             <input
               type="email"
@@ -28,7 +28,7 @@ export default function Login() {
           <div className="validator-hint hidden">Entrez un email valide</div>
 
           {/* PASSWORD */}
-          <label className="input input-lg validator bg-[#181825] w-full">
+          <label className="input input-lg validator w-full">
             <IoKeyOutline className="opacity-50" />
             <input
               type="password"
@@ -47,7 +47,7 @@ export default function Login() {
           <button
             type="submit"
             disabled={isLoading}
-            className="btn btn-lg btn-soft w-full bg-[#181825] hover:bg-[#11111b]"
+            className="btn btn-lg btn-soft w-full"
           >
             {isLoading ? (
               <span className="loading loading-spinner"></span>
