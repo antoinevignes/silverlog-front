@@ -25,7 +25,7 @@ export default function ProfilePage() {
     <div className="flex flex-col gap-4">
       <Link
         to="/"
-        className="absolute top-10 left-10 z-10 sm:flex gap-2 items-center hidden"
+        className="absolute top-10 left-10 z-10 sm:flex gap-2 items-center hidden text-[#cdd6f4]"
       >
         <FaArrowLeft />
         Retour
@@ -37,7 +37,7 @@ export default function ProfilePage() {
 
       <div className="flex items-center gap-4">
         <div className="avatar avatar-placeholder">
-          <div className="bg-neutral text-neutral-content w-20 rounded-full">
+          <div className="bg-[#181825] text-neutral-content w-20 rounded-full">
             <span className="text-3xl">
               {username.substring(0, 1).toUpperCase()}
             </span>
@@ -90,7 +90,7 @@ export default function ProfilePage() {
       {error && <p className="alert alert-error">{error}</p>}
 
       <button
-        className="btn btn-soft bg-neutral-900 hover:bg-neutral-950"
+        className="btn btn-soft bg-[#181825] hover:bg-[#11111b]"
         onClick={() => {
           saveNewProfile();
           if (!error) {

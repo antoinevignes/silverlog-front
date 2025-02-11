@@ -12,13 +12,13 @@ export default function MenuDaisy() {
         role="button"
         className="btn btn-ghost btn-circle avatar avatar-placeholder"
       >
-        <div className="w-10 rounded-full bg-neutral-900">
+        <div className="w-10 rounded-full bg-[#181825]">
           <span>{user?.username.substring(0, 1).toUpperCase()}</span>
         </div>
       </div>
       <ul
         tabIndex={0}
-        className="menu dropdown-content bg-neutral-900 rounded-box z-1 mt-3 w-52 p-2 shadow"
+        className="menu dropdown-content bg-[#181825] rounded-box z-1 mt-3 w-52 p-2 shadow"
       >
         <li>
           <Link to="/account/profile">Mon Profil</Link>

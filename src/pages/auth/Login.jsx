@@ -15,7 +15,7 @@ export default function Login() {
             Connectez vous
           </legend>
           {/* EMAIL */}
-          <label className="input input-lg validator w-full bg-neutral-900">
+          <label className="input input-lg validator bg-[#181825] w-full -900">
             <FaRegEnvelope className="opacity-50" />
             <input
               type="email"
@@ -28,7 +28,7 @@ export default function Login() {
           <div className="validator-hint hidden">Entrez un email valide</div>
 
           {/* PASSWORD */}
-          <label className="input input-lg validator bg-neutral-900 w-full">
+          <label className="input input-lg validator bg-[#181825] w-full">
             <IoKeyOutline className="opacity-50" />
             <input
               type="password"
@@ -47,7 +47,7 @@ export default function Login() {
           <button
             type="submit"
             disabled={isLoading}
-            className="btn btn-lg btn-soft w-full bg-neutral-900 hover:bg-neutral-950"
+            className="btn btn-lg btn-soft w-full bg-[#181825] hover:bg-[#11111b]"
           >
             {isLoading ? (
               <span className="loading loading-spinner"></span>

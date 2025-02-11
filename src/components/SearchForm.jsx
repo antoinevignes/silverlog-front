@@ -16,7 +16,7 @@ export default function SearchForm() {
 
   return (
     <form onSubmit={(e) => e.preventDefault()}>
-      <label className="input bg-neutral-900">
+      <label className="input bg-[#181825]">
         <FaMagnifyingGlass className="opacity-50" />
         <input
           type="search"
