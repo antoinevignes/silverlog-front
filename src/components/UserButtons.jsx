@@ -3,24 +3,16 @@ import { useWatchList } from "../../context/user/WatchListContext";
 import { useEffect } from "react";
 import { FaClock, FaEye, FaRegClock, FaRegEye } from "react-icons/fa6";
 import { useWatched } from "../../context/user/WatchedContext";
-import { Rating } from "@mui/material";
-import StarIcon from "@mui/icons-material/Star";
 import { useToast } from "../../context/Toaster";
+import RatingRadio from "./ui/RatingRadio";
 
 export default function UserButtons() {
   const { id } = useParams();
 
   // CONTEXTS
-  const { addToWatchList, watchList, fetchWatchList, deleteEntry } =
+  const { addToWatchList, watchList, getWatchList, deleteEntry } =
     useWatchList();
-  const {
-    addToWatched,
-    getWatched,
-    deleteWatched,
-    watched,
-    rating,
-    setRating,
-  } = useWatched();
+  const { addToWatched, getWatched, deleteWatched, watched } = useWatched();
   const { addToast } = useToast();
 
   // CHECK IF IN
@@ -29,44 +21,23 @@ export default function UserButtons() {
 
   // LOAD LISTS AT RENDER
   useEffect(() => {
-    fetchWatchList();
-  }, [fetchWatchList]);
+    getWatchList();
+  }, [getWatchList]);
 
   useEffect(() => {
     getWatched();
   }, [getWatched]);
 
-  useEffect(() => {
+  const handleWatchedClick = () => {
     if (isInWatched) {
-      setRating(isInWatched.rating);
-    } else {
-      setRating(0);
-    }
-  }, [isInWatched, setRating]);
-
-  const handleWatchedClick = async () => {
-    if (isInWatched) {
-      await deleteWatched(id);
+      deleteWatched(id);
       addToast("Retiré des films");
     } else {
-      await addToWatched(id);
+      addToWatched(id);
       addToast("Ajoutés aux films", "success");
 
       if (isInWatchList) {
-        await deleteEntry(id);
-        addToast("Retiré de la watchlist", "info");
-      }
-    }
-  };
-
-  const handleRatingChange = async (e, newRating) => {
-    await setRating(newRating);
-    if (newRating > 0) {
-      await addToWatched(id, newRating);
-      addToast("Ajoutés aux films", "success");
-
-      if (isInWatchList) {
-        await deleteEntry(id);
+        deleteEntry(id);
         addToast("Retiré de la watchlist", "info");
       }
     }
@@ -97,19 +68,7 @@ export default function UserButtons() {
         </button>
       </div>
 
-      <Rating
-        name="half-rating"
-        precision={0.5}
-        size="large"
-        emptyIcon={
-          <StarIcon
-            style={{ opacity: 0.55, color: "gray" }}
-            fontSize="inherit"
-          />
-        }
-        value={rating}
-        onChange={handleRatingChange}
-      />
+      <RatingRadio />
     </div>
   );
 }

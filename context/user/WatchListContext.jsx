@@ -16,14 +16,14 @@ const WatchListProvider = ({ children }) => {
         body: JSON.stringify({ tmdbId: id }),
       });
 
-      await fetchWatchList();
+      await getWatchList();
     } catch (error) {
       console.error(error.message);
     }
   };
 
   // GET
-  const fetchWatchList = useCallback(async () => {
+  const getWatchList = useCallback(async () => {
     try {
       const data = await apiFetch("/watchlist", {
         method: "GET",
@@ -42,7 +42,7 @@ const WatchListProvider = ({ children }) => {
         method: "DELETE",
       });
 
-      await fetchWatchList();
+      await getWatchList();
     } catch (error) {
       console.error(error.message);
     }
@@ -54,7 +54,7 @@ const WatchListProvider = ({ children }) => {
         watchList,
         setWatchList,
         addToWatchList,
-        fetchWatchList,
+        getWatchList,
         deleteEntry,
       }}
     >

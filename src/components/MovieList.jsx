@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 import { Link } from "react-router-dom";
+import Rating from "./ui/Rating";
 
 export default function MovieList({ data }) {
   const filteredData = data.results?.filter((item) => item.poster_path);
@@ -33,6 +34,9 @@ export default function MovieList({ data }) {
                   </p>
                 )}
               </div>
+            </div>
+            <div className="pt-2 flex">
+              <Rating rating={movie.rating} />
             </div>
           </Link>
         ))}

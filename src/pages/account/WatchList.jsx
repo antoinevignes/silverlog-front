@@ -3,11 +3,11 @@ import { useWatchList } from "../../../context/user/WatchListContext";
 import MovieList from "../../components/MovieList";
 
 export default function WatchList() {
-  const { watchList, fetchWatchList } = useWatchList();
+  const { watchList, getWatchList } = useWatchList();
 
   useEffect(() => {
-    fetchWatchList();
-  }, [fetchWatchList]);
+    getWatchList();
+  }, [getWatchList]);
 
   return (
     <>
