@@ -13,6 +13,8 @@ export default function RatingRadio() {
   const isInWatched = watched.results?.find((item) => item.id == id);
   const isInWatchList = watchList.results?.find((item) => item.id == id);
 
+  // LOAD LISTS AT RENDER
+
   useEffect(() => {
     if (isInWatched) {
       setRating(isInWatched.rating);
@@ -20,6 +22,8 @@ export default function RatingRadio() {
       setRating(0);
     }
   }, [isInWatched, setRating]);
+
+  /////////////////////////////
 
   const handleRatingChange = (e) => {
     const value = parseFloat(e.target.getAttribute("aria-label"));

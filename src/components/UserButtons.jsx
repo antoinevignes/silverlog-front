@@ -20,6 +20,7 @@ export default function UserButtons() {
   const isInWatched = watched.results?.find((item) => item.id == id);
 
   // LOAD LISTS AT RENDER
+
   useEffect(() => {
     getWatchList();
   }, [getWatchList]);
@@ -27,6 +28,8 @@ export default function UserButtons() {
   useEffect(() => {
     getWatched();
   }, [getWatched]);
+
+  /////////////////////
 
   const handleWatchedClick = () => {
     if (isInWatched) {
@@ -43,16 +46,17 @@ export default function UserButtons() {
     }
   };
 
+  const handleWatchListClick = () => {
+    isInWatchList
+      ? (deleteEntry(id), addToast("Retiré de la watchlist."))
+      : (addToWatchList(id), addToast("Ajouté à la watchlist !", "success"));
+  };
+
   return (
     <div className="flex gap-4 items-center">
       <div className="tooltip" data-tip="Ajouter à la watchlist">
         <button
-          onClick={() =>
-            isInWatchList
-              ? (deleteEntry(id), addToast("Retiré de la watchlist."))
-              : (addToWatchList(id),
-                addToast("Ajouté à la watchlist !", "success"))
-          }
+          onClick={handleWatchListClick}
           className="btn btn-soft btn-square btn-lg"
         >
           {isInWatchList ? <FaClock /> : <FaRegClock />}
