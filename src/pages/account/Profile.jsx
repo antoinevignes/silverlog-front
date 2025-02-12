@@ -1,4 +1,6 @@
 import { FaMapMarkerAlt, FaUserEdit, FaUserFriends } from "react-icons/fa";
+import { Link } from "react-router-dom";
+import { useProfile } from "../../../context/user/ProfileContext";
 
 // Mock data
 const userData = {
@@ -56,28 +58,30 @@ const userData = {
 };
 
 export default function ProfilePage() {
+  const { username, firstName, lastName, bio } = useProfile();
   return (
     <div className="container mx-auto p-4 max-w-5xl">
       <div className="flex flex-col md:flex-row gap-8 justify-center">
         {/* Main Profile Section */}
-        <div className="md:w-1/3">
+        <div className="md:w-1/3 flex flex-col justify-center">
           <div className="card bg-base-100 shadow-xl p-4">
-            <figure className="px-10 pt-10">
-              <img
-                src={userData.avatar || "/placeholder.svg"}
-                alt={userData.name}
-                className="rounded-full w-32 h-32"
-              />
-            </figure>
+            <div className="avatar avatar-placeholder flex justify-center items-center pt-10">
+              <div className="bg-base-300 text-neutral-content w-24 rounded-full">
+                <span>{username.substring(0, 1).toUpperCase()}</span>
+              </div>
+            </div>
             <div className="card-body items-center text-center">
-              <h2 className="card-title text-2xl font-bold">{userData.name}</h2>
+              <h2 className="card-title text-2xl font-bold">
+                {firstName} {lastName}
+              </h2>
               <p className="text-sm text-gray-500 flex items-center gap-1">
                 <FaMapMarkerAlt /> {userData.location}
               </p>
-              <p className="mt-2">{userData.bio}</p>
+              <p className="mt-2">{bio}</p>
               <div className="card-actions mt-4">
-                <button className="btn btn-primary">
-                  <FaUserEdit className="mr-2" /> Edit Profile
+                <button className="btn btn-soft">
+                  <FaUserEdit />
+                  <Link to="/account/profile/edit">Modifier profil</Link>
                 </button>
               </div>
             </div>
@@ -87,14 +91,14 @@ export default function ProfilePage() {
           <div className="card bg-base-100 shadow-xl mt-4 p-4">
             <div className="card-body">
               <div className="flex justify-between items-center">
+                <FaUserFriends className="text-xl" />
                 <div className="flex items-center gap-2">
-                  <FaUserFriends className="text-xl" />
                   <span className="font-bold">{userData.followers}</span>{" "}
                   Followers
                 </div>
                 <div className="flex items-center gap-2">
                   <span className="font-bold">{userData.following}</span>{" "}
-                  Following
+                  Suivi(e)s
                 </div>
               </div>
             </div>
