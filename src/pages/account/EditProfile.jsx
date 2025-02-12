@@ -11,6 +11,8 @@ export default function EditProfile() {
     setFirstName,
     lastName,
     setLastName,
+    location,
+    setLocation,
     bio,
     setBio,
     saveNewProfile,
@@ -68,6 +70,13 @@ export default function EditProfile() {
         placeholder="Pseudo"
         value={username}
         onChange={(e) => setUsername(e.target.value)}
+      />
+      <input
+        type="text"
+        className="input w-full"
+        placeholder="Localisation"
+        value={location}
+        onChange={(e) => setLocation(e.target.value)}
       />
 
       <textarea

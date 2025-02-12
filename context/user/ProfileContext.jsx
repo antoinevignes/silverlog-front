@@ -13,6 +13,7 @@ export default function ProfileProvider({ children }) {
   const [bio, setBio] = useState(user?.bio);
   const [firstName, setFirstName] = useState(user?.firstName);
   const [lastName, setLastName] = useState(user?.lastName);
+  const [location, setLocation] = useState(user?.location);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
@@ -25,7 +26,14 @@ export default function ProfileProvider({ children }) {
     try {
       const data = await apiFetch("/user/edit", {
         method: "POST",
-        body: JSON.stringify({ username, email, bio, firstName, lastName }),
+        body: JSON.stringify({
+          username,
+          email,
+          bio,
+          firstName,
+          lastName,
+          location,
+        }),
       });
 
       localStorage.setItem("user", JSON.stringify(data.user));
@@ -35,6 +43,7 @@ export default function ProfileProvider({ children }) {
       setBio(data.user.bio);
       setFirstName(data.user.firstName);
       setLastName(data.user.lastName);
+      setLocation(data.user.location);
     } catch (error) {
       setError(error.message);
       throw error;
@@ -59,6 +68,8 @@ export default function ProfileProvider({ children }) {
         saveNewProfile,
         isLoading,
         error,
+        location,
+        setLocation,
       }}
     >
       {children}

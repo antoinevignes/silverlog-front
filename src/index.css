@@ -1,7 +1,7 @@
 @import "tailwindcss";
 @import "tailwindcss";
 @plugin "daisyui" {
-  themes: dracula;
+  themes: light --default, dark --prefersdark, dracula;
 }
 
 :root {
@@ -15,15 +15,6 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-a {
-  font-weight: 500;
-  color: white;
-  text-decoration: inherit;
-}
-a:hover {
-  color: rgb(192, 192, 192);
 }
 
 body {

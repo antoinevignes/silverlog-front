@@ -4,10 +4,6 @@ import { useProfile } from "../../../context/user/ProfileContext";
 
 // Mock data
 const userData = {
-  name: "Jane Doe",
-  avatar: "/placeholder.svg?height=128&width=128",
-  bio: "Film enthusiast and aspiring critic. I love exploring new genres and discussing cinema.",
-  location: "New York, NY",
   followers: 1234,
   following: 567,
   favoriteMovies: [
@@ -58,16 +54,18 @@ const userData = {
 };
 
 export default function ProfilePage() {
-  const { username, firstName, lastName, bio } = useProfile();
+  const { username, firstName, lastName, bio, location } = useProfile();
   return (
     <div className="container mx-auto p-4 max-w-5xl">
       <div className="flex flex-col md:flex-row gap-8 justify-center">
         {/* Main Profile Section */}
         <div className="md:w-1/3 flex flex-col justify-center">
-          <div className="card bg-base-100 shadow-xl p-4">
+          <div className="card bg-base-200 shadow-md p-4">
             <div className="avatar avatar-placeholder flex justify-center items-center pt-10">
               <div className="bg-base-300 text-neutral-content w-24 rounded-full">
-                <span>{username.substring(0, 1).toUpperCase()}</span>
+                <span className="text-3xl">
+                  {username.substring(0, 1).toUpperCase()}
+                </span>
               </div>
             </div>
             <div className="card-body items-center text-center">
@@ -75,7 +73,7 @@ export default function ProfilePage() {
                 {firstName} {lastName}
               </h2>
               <p className="text-sm text-gray-500 flex items-center gap-1">
-                <FaMapMarkerAlt /> {userData.location}
+                <FaMapMarkerAlt /> {location}
               </p>
               <p className="mt-2">{bio}</p>
               <div className="card-actions mt-4">
@@ -88,7 +86,7 @@ export default function ProfilePage() {
           </div>
 
           {/* Followers/Following Section */}
-          <div className="card bg-base-100 shadow-xl mt-4 p-4">
+          <div className="card bg-base-200 shadow-md mt-4 p-4">
             <div className="card-body">
               <div className="flex justify-between items-center">
                 <FaUserFriends className="text-xl" />
@@ -108,7 +106,7 @@ export default function ProfilePage() {
         {/* Right Column */}
         <div className="md:w-2/3">
           {/* Favorite Movies Section */}
-          <div className="card bg-base-100 shadow-xl mb-4 p-4">
+          <div className="card bg-base-200 shadow-md mb-4 p-4">
             <div className="card-body">
               <h3 className="card-title text-xl mb-4">Favorite Movies</h3>
               <div className="flex flex-wrap gap-4 justify-center">
@@ -128,7 +126,7 @@ export default function ProfilePage() {
           </div>
 
           {/* Recently Added Movies Section */}
-          <div className="card bg-base-100 shadow-xl mb-4 p-4">
+          <div className="card bg-base-200 shadow-md mb-4 p-4">
             <div className="card-body">
               <h3 className="card-title text-xl mb-4">Recently Added</h3>
               <div className="flex flex-wrap gap-4 justify-center">
@@ -141,27 +139,6 @@ export default function ProfilePage() {
                     />
                     <p className="text-sm mt-1">{movie.title}</p>
                     <p className="text-xs text-gray-500">{movie.year}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          {/* Ratings Histogram */}
-          <div className="card bg-base-100 shadow-xl p-4">
-            <div className="card-body">
-              <h3 className="card-title text-xl mb-4">Ratings Distribution</h3>
-              <div className="flex items-end h-48 justify-center">
-                {userData.ratings.map((count, index) => (
-                  <div
-                    key={index}
-                    className="flex-1 flex flex-col items-center mx-1"
-                  >
-                    <div
-                      className="bg-primary w-full"
-                      style={{ height: `${Math.max(count, 5)}%` }}
-                    ></div>
-                    <span className="text-xs mt-1">{(index + 1) * 0.5}</span>
                   </div>
                 ))}
               </div>
