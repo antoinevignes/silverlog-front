@@ -4,6 +4,7 @@ import { ProtectedRoute } from "../routes/ProtectedRoute";
 import { routes } from "../routes/Routes";
 import Navbar from "./components/ui/Navbar";
 import { useAuth } from "../context/auth/AuthContext";
+import Footer from "./components/ui/Footer";
 
 const renderRoute = (route) => {
   const element = route.protected ? (
@@ -20,14 +21,13 @@ function App() {
 
   return (
     <BrowserRouter>
-      {isLoggedIn && (
-        <div className="absolute top-0 left-0 w-full z-[100]">
-          <Navbar />
-        </div>
-      )}
-      <main>
-        <Routes>{routes.map(renderRoute)}</Routes>
-      </main>
+      <div className="flex flex-col justify-between h-screen">
+        {isLoggedIn && <Navbar />}
+        <main>
+          <Routes>{routes.map(renderRoute)}</Routes>
+        </main>
+        <Footer />
+      </div>
     </BrowserRouter>
   );
 }

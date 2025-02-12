@@ -34,7 +34,27 @@ const MovieProvider = ({ children }) => {
         options
       );
       const data = await response.json();
-      setMovies(data.results?.length ? data : {});
+
+      if (data.results?.length) {
+        const moviesWithCredits = await Promise.all(
+          data.results.map(async (movie) => {
+            const creditsResponse = await fetch(
+              `https://api.themoviedb.org/3/movie/${movie.id}/credits?language=fr-FR`,
+              options
+            );
+            const creditsData = await creditsResponse.json();
+            return {
+              ...movie,
+              credits: creditsData,
+            };
+          })
+        );
+
+        setMovies({ ...data, results: moviesWithCredits });
+        console.log(movies);
+      } else {
+        setMovies({});
+      }
     } catch (error) {
       console.error(error.message);
     } finally {

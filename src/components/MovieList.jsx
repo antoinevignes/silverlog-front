@@ -40,8 +40,16 @@ export default function MovieList({ data }) {
                   </div>
 
                   <p className="line-clamp-2 text-left">{movie.overview}</p>
-                  <p className="text-left opacity-60">Genres :</p>
-                  <p className="text-left opacity-60">Réalisateur :</p>
+                  <p className="text-left opacity-60 font-bold">
+                    <span>Réalisateur : </span>
+                    <span className="link link-hover">
+                      {
+                        movie.credits.crew?.find(
+                          (person) => person.job === "Director"
+                        )?.name
+                      }
+                    </span>
+                  </p>
                 </div>
               </li>
             ))}

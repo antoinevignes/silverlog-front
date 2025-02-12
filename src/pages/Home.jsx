@@ -4,8 +4,6 @@ import MovieList from "../components/MovieList";
 export default function Home() {
   const { movies } = useMovies();
 
-  console.log(movies);
-
   return (
     <div className="hero">
       <div className="hero-content text-center flex flex-col">
