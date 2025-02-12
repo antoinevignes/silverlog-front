@@ -1,11 +1,11 @@
 import MyMovies from "../src/pages/account/MyMovies";
-import ProfilePage from "../src/pages/account/Profile";
-import Profile from "../src/pages/account/Profile";
 import WatchList from "../src/pages/account/WatchList";
 import Login from "../src/pages/auth/Login";
 import Register from "../src/pages/auth/Register";
 import Home from "../src/pages/Home";
 import MovieDetail from "../src/pages/MovieDetail";
+import EditProfile from "../src/pages/account/EditProfile";
+import ProfilePage from "../src/pages/account/Profile";
 
 export const routes = [
   {
@@ -20,12 +20,12 @@ export const routes = [
   },
   {
     path: "/account/profile",
-    element: <Profile />,
+    element: <ProfilePage />,
     protected: true,
   },
   {
     path: "/account/profile/edit",
-    element: <ProfilePage />,
+    element: <EditProfile />,
     protected: true,
   },
   {

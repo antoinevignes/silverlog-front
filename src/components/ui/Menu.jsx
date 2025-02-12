@@ -24,12 +24,6 @@ export default function MenuDaisy() {
           <Link to="/account/profile">Mon Profil</Link>
         </li>
         <li>
-          <Link to="/account/watchlist">Watchlist</Link>
-        </li>
-        <li>
-          <Link to="/account/watched">Mes films</Link>
-        </li>
-        <li>
           <Link to="/login" onClick={() => logout()}>
             Déconnexion
           </Link>

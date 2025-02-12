@@ -1,8 +1,9 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
 import { ProtectedRoute } from "../routes/ProtectedRoute";
-import NavigationLinks from "./components/ui/NavLinks";
 import { routes } from "../routes/Routes";
+import Navbar from "./components/ui/Navbar";
+import { useAuth } from "../context/auth/AuthContext";
 
 const renderRoute = (route) => {
   const element = route.protected ? (
@@ -15,9 +16,15 @@ const renderRoute = (route) => {
 };
 
 function App() {
+  const { isLoggedIn } = useAuth();
+
   return (
     <BrowserRouter>
-      <NavigationLinks />
+      {isLoggedIn && (
+        <div className="absolute top-0 left-0 w-screen z-[100]">
+          <Navbar />
+        </div>
+      )}
       <main>
         <Routes>{routes.map(renderRoute)}</Routes>
       </main>
