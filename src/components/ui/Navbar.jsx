@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import MenuDaisy from "./Menu";
+import SearchForm from "../SearchForm";
 
 export default function Navbar() {
   return (
@@ -10,11 +11,7 @@ export default function Navbar() {
         </button>
       </div>
       <div className="flex gap-2">
-        <input
-          type="text"
-          placeholder="Search"
-          className="input input-bordered w-24 md:w-auto"
-        />
+        <SearchForm />
         <MenuDaisy />
       </div>
     </div>

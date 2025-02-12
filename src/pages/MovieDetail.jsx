@@ -1,7 +1,8 @@
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useMovies } from "../../context/movies/MovieContext";
 import { useEffect } from "react";
 import UserButtons from "../components/UserButtons";
+import { FaArrowLeft } from "react-icons/fa6";
 
 export default function MovieDetail() {
   const { id } = useParams();
@@ -14,6 +15,11 @@ export default function MovieDetail() {
 
   return (
     <>
+      <div className="z-[100] absolute top-25 left-10">
+        <Link to="/" className="link link-hover flex items-center gap-2">
+          <FaArrowLeft /> Retour
+        </Link>
+      </div>
       {movie.backdrop_path && (
         <img
           src={`https://image.tmdb.org/t/p/original/${movie.backdrop_path}`}

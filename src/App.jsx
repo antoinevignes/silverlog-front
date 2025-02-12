@@ -21,7 +21,7 @@ function App() {
   return (
     <BrowserRouter>
       {isLoggedIn && (
-        <div className="absolute top-0 left-0 w-screen z-[100]">
+        <div className="absolute top-0 left-0 w-full z-[100]">
           <Navbar />
         </div>
       )}

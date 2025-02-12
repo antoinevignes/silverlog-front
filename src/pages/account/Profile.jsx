@@ -79,7 +79,7 @@ export default function ProfilePage() {
               <div className="card-actions mt-4">
                 <button className="btn btn-soft">
                   <FaUserEdit />
-                  <Link to="/account/profile/edit">Modifier profil</Link>
+                  <Link to="/profile/edit">Modifier profil</Link>
                 </button>
               </div>
             </div>

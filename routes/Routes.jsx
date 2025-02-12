@@ -19,22 +19,22 @@ export const routes = [
     protected: true,
   },
   {
-    path: "/account/profile",
+    path: "/profile",
     element: <ProfilePage />,
     protected: true,
   },
   {
-    path: "/account/profile/edit",
+    path: "/profile/edit",
     element: <EditProfile />,
     protected: true,
   },
   {
-    path: "/account/watchlist",
+    path: "/profile/watchlist",
     element: <WatchList />,
     protected: true,
   },
   {
-    path: "/account/watched",
+    path: "/profile/watched",
     element: <MyMovies />,
     protected: true,
   },

@@ -1,9 +1,10 @@
 import { useMovies } from "../../context/movies/MovieContext";
 import MovieList from "../components/MovieList";
-import SearchForm from "../components/SearchForm";
 
 export default function Home() {
   const { movies } = useMovies();
+
+  console.log(movies);
 
   return (
     <div className="hero">
@@ -18,8 +19,6 @@ export default function Home() {
               </p>
             </div>
           )}
-
-          <SearchForm />
         </div>
 
         {movies.results && <MovieList data={movies} />}

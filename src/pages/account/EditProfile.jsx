@@ -1,5 +1,7 @@
 import { useProfile } from "../../../context/user/ProfileContext";
 import { useToast } from "../../../context/Toaster";
+import { Link } from "react-router-dom";
+import { FaArrowLeft } from "react-icons/fa";
 
 export default function EditProfile() {
   const {
@@ -23,6 +25,11 @@ export default function EditProfile() {
 
   return (
     <div className="flex flex-col gap-4 w-[60vw]">
+      <div className="absolute top-25 left-10">
+        <Link to="/profile" className="link link-hover flex items-center gap-2">
+          <FaArrowLeft /> Retour
+        </Link>
+      </div>
       <h2 className="text-2xl font-bold">Votre profil</h2>
 
       <div className="divider font-bold">Votre photo de profil</div>
