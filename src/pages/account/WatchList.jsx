@@ -9,6 +9,8 @@ export default function WatchList() {
     getWatchList();
   }, [getWatchList]);
 
+  console.log(watchList);
+
   return (
     <>
       <h1 className="font-bold sm:mt-0 mt-20">Ma Watchlist</h1>

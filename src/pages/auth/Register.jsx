@@ -6,7 +6,7 @@ import { useAuth } from "../../../context/auth/AuthContext";
 export default function Register() {
   const { register, formData, setFormData, isLoading, error } = useAuth();
   return (
-    <div>
+    <div className="flex flex-col justify-center items-center h-screen">
       <form onSubmit={register}>
         <fieldset className="fieldset w-lg border p-4 rounded-box">
           <legend className="fieldset-legend text-2xl font-bold px-2">

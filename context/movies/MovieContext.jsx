@@ -12,15 +12,14 @@ const MovieProvider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(false);
 
   // SEARCH MOVIES
-  async function searchMovies(input) {
+  const searchMovies = useCallback(async (input) => {
     if (!input.trim() || input.trim().length < 2) {
       setMovies({});
-      setIsLoading(false);
       return;
     }
 
+    setIsLoading(true);
     try {
-      setIsLoading(true);
       const options = {
         method: "GET",
         headers: {
@@ -35,32 +34,29 @@ const MovieProvider = ({ children }) => {
       );
       const data = await response.json();
 
-      if (data.results?.length) {
-        const moviesWithCredits = await Promise.all(
-          data.results.map(async (movie) => {
-            const creditsResponse = await fetch(
-              `https://api.themoviedb.org/3/movie/${movie.id}/credits?language=fr-FR`,
-              options
-            );
-            const creditsData = await creditsResponse.json();
-            return {
-              ...movie,
-              credits: creditsData,
-            };
-          })
-        );
-
-        setMovies({ ...data, results: moviesWithCredits });
-        console.log(movies);
-      } else {
+      if (!data.results?.length) {
         setMovies({});
+        return;
       }
+
+      const moviesWithCredits = await Promise.all(
+        data.results.map(async (movie) => ({
+          ...movie,
+          credits: await fetch(
+            `https://api.themoviedb.org/3/movie/${movie.id}/credits?language=fr-FR`,
+            options
+          ).then((res) => res.json()),
+        }))
+      );
+
+      setMovies({ ...data, results: moviesWithCredits });
     } catch (error) {
-      console.error(error.message);
+      console.error(error);
+      setMovies({});
     } finally {
       setIsLoading(false);
     }
-  }
+  }, []);
 
   // GET ONE MOVIE
   const getMovieByID = useCallback(async (id) => {

@@ -24,7 +24,7 @@ export default function EditProfile() {
   const { addToast } = useToast();
 
   return (
-    <div className="flex flex-col gap-4 w-[60vw]">
+    <div className="flex flex-col mx-auto gap-4 w-[60vw]">
       <div className="absolute top-25 left-10">
         <Link to="/profile" className="link link-hover flex items-center gap-2">
           <FaArrowLeft /> Retour

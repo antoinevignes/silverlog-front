@@ -1,60 +1,21 @@
 import { FaMapMarkerAlt, FaUserEdit, FaUserFriends } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { useProfile } from "../../../context/user/ProfileContext";
-
-// Mock data
-const userData = {
-  followers: 1234,
-  following: 567,
-  favoriteMovies: [
-    {
-      title: "The Godfather",
-      year: 1972,
-      poster: "/placeholder.svg?height=150&width=100",
-    },
-    {
-      title: "Pulp Fiction",
-      year: 1994,
-      poster: "/placeholder.svg?height=150&width=100",
-    },
-    {
-      title: "The Shawshank Redemption",
-      year: 1994,
-      poster: "/placeholder.svg?height=150&width=100",
-    },
-    {
-      title: "The Dark Knight",
-      year: 2008,
-      poster: "/placeholder.svg?height=150&width=100",
-    },
-    {
-      title: "Inception",
-      year: 2010,
-      poster: "/placeholder.svg?height=150&width=100",
-    },
-  ],
-  recentlyAdded: [
-    {
-      title: "Parasite",
-      year: 2019,
-      poster: "/placeholder.svg?height=150&width=100",
-    },
-    {
-      title: "The French Dispatch",
-      year: 2021,
-      poster: "/placeholder.svg?height=150&width=100",
-    },
-    {
-      title: "Dune",
-      year: 2021,
-      poster: "/placeholder.svg?height=150&width=100",
-    },
-  ],
-  ratings: [10, 25, 50, 100, 80, 60, 40, 30, 20, 10], // Ratings from 0.5 to 5 stars
-};
+import { useWatchList } from "../../../context/user/WatchListContext";
+import { useEffect } from "react";
 
 export default function ProfilePage() {
   const { username, firstName, lastName, bio, location } = useProfile();
+  const { getWatchList, watchList } = useWatchList();
+
+  useEffect(() => {
+    getWatchList();
+  }, [getWatchList]);
+
+  console.log(watchList.results);
+
+  const lastMovies = watchList.results?.slice(0, 5);
+
   return (
     <div className="container mx-auto p-4 max-w-5xl">
       <div className="flex flex-col md:flex-row gap-8 justify-center">
@@ -91,12 +52,10 @@ export default function ProfilePage() {
               <div className="flex justify-between items-center">
                 <FaUserFriends className="text-xl" />
                 <div className="flex items-center gap-2">
-                  <span className="font-bold">{userData.followers}</span>{" "}
-                  Followers
+                  <span className="font-bold">0</span> Followers
                 </div>
                 <div className="flex items-center gap-2">
-                  <span className="font-bold">{userData.following}</span>{" "}
-                  Suivi(e)s
+                  <span className="font-bold">0</span> Suivi(e)s
                 </div>
               </div>
             </div>
@@ -105,43 +64,57 @@ export default function ProfilePage() {
 
         {/* Right Column */}
         <div className="md:w-2/3">
-          {/* Favorite Movies Section */}
+          {/* WATCHLIST */}
           <div className="card bg-base-200 shadow-md mb-4 p-4">
             <div className="card-body">
-              <h3 className="card-title text-xl mb-4">Favorite Movies</h3>
-              <div className="flex flex-wrap gap-4 justify-center">
-                {userData.favoriteMovies.map((movie, index) => (
-                  <div key={index} className="text-center">
-                    <img
-                      src={movie.poster || "/placeholder.svg"}
-                      alt={movie.title}
-                      className="w-24 h-36 object-cover rounded"
-                    />
-                    <p className="text-sm mt-1">{movie.title}</p>
-                    <p className="text-xs text-gray-500">{movie.year}</p>
-                  </div>
+              <h3 className="card-title text-xl mb-4">Ma Watchlist</h3>
+              <div className="flex gap-2">
+                {lastMovies?.map((movie, index) => (
+                  <Link to={`/movies/${movie.id}`} key={index}>
+                    {movie.poster_path ? (
+                      <img
+                        src={`https://image.tmdb.org/t/p/w200/${movie.poster_path}`}
+                        alt={movie.title}
+                        className="w-full h-full object-cover rounded-md hover:border"
+                      />
+                    ) : (
+                      <p className="mb-2 whitespace-nowrap overflow-hidden text-ellipsis">
+                        {movie.title}
+                      </p>
+                    )}
+                  </Link>
                 ))}
               </div>
+              <Link to="/profile/watchlist" className="mt-4 text-right">
+                <p className="link link-hover">Voir tout</p>
+              </Link>
             </div>
           </div>
 
-          {/* Recently Added Movies Section */}
+          {/* MES FILMS */}
           <div className="card bg-base-200 shadow-md mb-4 p-4">
             <div className="card-body">
-              <h3 className="card-title text-xl mb-4">Recently Added</h3>
-              <div className="flex flex-wrap gap-4 justify-center">
-                {userData.recentlyAdded.map((movie, index) => (
-                  <div key={index} className="text-center">
-                    <img
-                      src={movie.poster || "/placeholder.svg"}
-                      alt={movie.title}
-                      className="w-24 h-36 object-cover rounded"
-                    />
-                    <p className="text-sm mt-1">{movie.title}</p>
-                    <p className="text-xs text-gray-500">{movie.year}</p>
-                  </div>
+              <h3 className="card-title text-xl mb-4">Mes Films</h3>
+              <div className="flex gap-2">
+                {lastMovies?.map((movie, index) => (
+                  <Link to={`/movies/${movie.id}`} key={index}>
+                    {movie.poster_path ? (
+                      <img
+                        src={`https://image.tmdb.org/t/p/w200/${movie.poster_path}`}
+                        alt={movie.title}
+                        className="w-full h-full object-cover rounded-md hover:border"
+                      />
+                    ) : (
+                      <p className="mb-2 whitespace-nowrap overflow-hidden text-ellipsis">
+                        {movie.title}
+                      </p>
+                    )}
+                  </Link>
                 ))}
               </div>
+              <Link to="/profile/watchlist" className="mt-4 text-right">
+                <p className="link link-hover">Voir tout</p>
+              </Link>
             </div>
           </div>
         </div>

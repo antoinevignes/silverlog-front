@@ -1,28 +1,23 @@
 import { useMovies } from "../../context/movies/MovieContext";
 import { FaMagnifyingGlass } from "react-icons/fa6";
-import { useCallback } from "react";
 
 export default function SearchForm() {
   const { input, setInput, searchMovies } = useMovies();
 
-  const handleInputChange = useCallback(
-    (e) => {
-      const value = e.target.value;
-      setInput(value);
-      searchMovies(value);
-    },
-    [setInput, searchMovies]
-  );
-
   return (
-    <form onSubmit={(e) => e.preventDefault()}>
+    <form
+      onSubmit={(e) => {
+        e.preventDefault();
+        searchMovies(input);
+      }}
+    >
       <label className="input">
         <FaMagnifyingGlass className="opacity-50" />
         <input
           type="search"
           placeholder="Cherchez un film..."
           value={input}
-          onChange={handleInputChange}
+          onChange={(e) => setInput(e.target.value)}
         />
       </label>
     </form>

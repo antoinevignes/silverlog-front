@@ -8,7 +8,7 @@ export default function Login() {
     useAuth();
 
   return (
-    <div>
+    <div className="flex flex-col h-screen justify-center items-center">
       <form onSubmit={login}>
         <fieldset className="fieldset w-lg border p-4 rounded-box">
           <legend className="fieldset-legend text-2xl font-bold px-2">

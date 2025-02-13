@@ -25,11 +25,29 @@ const WatchListProvider = ({ children }) => {
   // GET
   const getWatchList = useCallback(async () => {
     try {
-      const data = await apiFetch("/watchlist", {
-        method: "GET",
-      });
+      const data = await apiFetch("/watchlist", { method: "GET" });
 
-      setWatchList(data);
+      if (data.results?.length) {
+        const options = {
+          method: "GET",
+          headers: {
+            accept: "application/json",
+            Authorization: `Bearer ${import.meta.env.VITE_TMDB_KEY}`,
+          },
+        };
+
+        const moviesWithCredits = await Promise.all(
+          data.results.map(async (movie) => ({
+            ...movie,
+            credits: await fetch(
+              `https://api.themoviedb.org/3/movie/${movie.id}/credits?language=fr-FR`,
+              options
+            ).then((res) => res.json()),
+          }))
+        );
+
+        setWatchList({ ...data, results: moviesWithCredits });
+      }
     } catch (error) {
       console.error(error.message);
     }
